@@ -4,6 +4,8 @@ frame_ms = 500
 x_units = 2
 y_units = 2
 z_units = 2
+azimuthal_degrees = 0
+elevation_degrees = 45
 # ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 
 import json
@@ -32,12 +34,18 @@ def update(frame, data, ax):
 	points = data[frame] if frame < len(data) else []
 	for p in points:
 		plot_cube(ax, p["x"], p["y"], p["z"])
+	ax.view_init(elev=elevation_degrees, azim=azimuthal_degrees)
 	return ax
 
 fig = pyplot.figure()
 ax = fig.add_subplot(111, projection='3d')
 with open(filepath, 'r') as file:
 	data = json.load(file)
-ani = animation.FuncAnimation(fig, update, frames=len(data), fargs=(data, ax), interval=frame_ms, blit=False)
+ani = animation.FuncAnimation(fig, update,
+	frames=len(data),
+	fargs=(data, ax),
+	interval=frame_ms,
+	blit=False
+)
 ani.save("animation.gif", writer="pillow")
 pyplot.show()
