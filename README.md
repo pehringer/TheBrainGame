@@ -4,4 +4,4 @@ Each cell has a unique threshold (0-7) and six unique connections, one for each 
 Connections can be either excitatory (+1) or inhibitory (-1).
 A cell's state is determined by computing the dot product of its connections and their corresponding neighbor states.
 If the result meets or exceeds the cell’s threshold, it spikes (1). Otherwise, it rests (0).
-![Current Progress](animation.gif)
+![Current Progress](output.gif)
